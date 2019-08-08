@@ -1,8 +1,5 @@
 ﻿using System.IO;
-using GLTF;
-using UnityEngine;
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 
 namespace UnityGLTF.Loader
@@ -20,17 +17,35 @@ namespace UnityGLTF.Loader
 			HasSyncLoadMethod = true;
 		}
 
-		public Task LoadStream(string gltfFilePath)
+#pragma warning disable 1998
+		public async Task LoadStream(string gltfFilePath)
+#pragma warning restore 1998
 		{
 			if (gltfFilePath == null)
 			{
 				throw new ArgumentNullException("gltfFilePath");
 			}
 
-			return LoadFileStream(_rootDirectoryPath, gltfFilePath);
+			string pathToLoad = Path.Combine(_rootDirectoryPath, gltfFilePath);
+			if (!File.Exists(pathToLoad))
+			{
+				throw new FileNotFoundException("Buffer file not found", gltfFilePath);
+			}
+
+			LoadedStream = File.OpenRead(pathToLoad);
 		}
 
-		private Task LoadFileStream(string rootPath, string fileToLoad)
+		public void LoadStreamSync(string gltfFilePath)
+		{
+			if (gltfFilePath == null)
+			{
+				throw new ArgumentNullException("gltfFilePath");
+			}
+
+			LoadFileStreamSync(_rootDirectoryPath, gltfFilePath);
+		}
+
+		private void LoadFileStreamSync(string rootPath, string fileToLoad)
 		{
 			string pathToLoad = Path.Combine(rootPath, fileToLoad);
 			if (!File.Exists(pathToLoad))
@@ -38,28 +53,7 @@ namespace UnityGLTF.Loader
 				throw new FileNotFoundException("Buffer file not found", fileToLoad);
 			}
 
-			return Task.Run(() => { LoadedStream = File.OpenRead(pathToLoad); });
+			LoadedStream = File.OpenRead(pathToLoad);
 		}
-
-		public void LoadStreamSync(string gltfFilePath)
- 	    {
- 	        if (gltfFilePath == null)
- 	        {
- 	            throw new ArgumentNullException("gltfFilePath");
- 	        }
- 
- 	        LoadFileStreamSync(_rootDirectoryPath, gltfFilePath);
- 	    }
- 
- 	    private void LoadFileStreamSync(string rootPath, string fileToLoad)
- 	    {
- 	        string pathToLoad = Path.Combine(rootPath, fileToLoad);
- 	        if (!File.Exists(pathToLoad))
- 	        {
- 	            throw new FileNotFoundException("Buffer file not found", fileToLoad);
- 	        }
- 
- 	        LoadedStream = File.OpenRead(pathToLoad);
- 	    }
 	}
 }
