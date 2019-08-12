@@ -7,7 +7,7 @@ Shader "GLTF/PbrSpecularGlossiness"
 		_Color("Base Color Factor", Color) = (1,1,1,1)
 		_MainTex("Base Color Texture", 2D) = "white" {}
 
-		[Toggle(_VERTEX_COLORS)] _VertexColors("Vertex Colors", Float) = 1.0
+		[Toggle(_VERTEX_COLORS)] _VertexColors("Vertex Colors", Float) = 0.0
 
 		_Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 		
