@@ -349,9 +349,15 @@ namespace UnityGLTF
 			set
 			{
 				if (value)
+				{
 					_material.EnableKeyword("VERTEX_COLOR_ON");
+					_material.EnableKeyword("_VERTEX_COLORS");
+				}
 				else
+				{
 					_material.DisableKeyword("VERTEX_COLOR_ON");
+					_material.DisableKeyword("_VERTEX_COLORS");
+				}
 			}
 		}
 
