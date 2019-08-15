@@ -71,7 +71,22 @@ namespace UnityGLTF.Cache
 		public void Dispose()
 		{
 			ImageCache = null;
-			ImageStreamCache = null;
+			if (ImageStreamCache != null)
+			{
+				foreach (var imageStream in ImageStreamCache)
+				{
+					if (imageStream != null)
+					{
+#if !WINDOWS_UWP
+						imageStream.Close();
+#else
+                        imageStream.Dispose();
+#endif
+					}
+				}
+				ImageStreamCache = null;
+			}
+
 			TextureCache = null;
 			MaterialCache = null;
 			if (BufferCache != null)
