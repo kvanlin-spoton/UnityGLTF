@@ -1061,6 +1061,11 @@ namespace UnityGLTF
 
 		private static void SetTangentMode(AnimationCurve curve, int keyframeIndex, InterpolationType interpolation)
 		{
+			if (keyframeIndex <= 0 || keyframeIndex >= curve.keys.Length)
+			{
+				return;
+			}
+
 			var key = curve.keys[keyframeIndex];
 
 			switch (interpolation)
