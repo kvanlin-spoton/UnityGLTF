@@ -1096,6 +1096,9 @@ namespace UnityGLTF
 			var valueDelta = keyframes[keyframeIndex].value - keyframes[keyframeIndex - 1].value;
 			var timeDelta = keyframes[keyframeIndex].time - keyframes[keyframeIndex - 1].time;
 
+			if (timeDelta <= 0)
+				timeDelta = Mathf.Epsilon;
+
 			Debug.Assert(timeDelta > 0, "Unity does not allow you to put two keyframes in with the same time, so this should never occur.");
 
 			return valueDelta / timeDelta;
