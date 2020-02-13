@@ -3,7 +3,7 @@
 
 #include "UnityCG.cginc"
 #include "UnityStandardInput.cginc"
-#include "UnityStandardCoreForward.cginc"
+#include "UnityGltfStandardCoreForward.cginc"
 
 struct WrappedVertexOutputForwardBase {
     VertexOutputForwardBase innerValue;

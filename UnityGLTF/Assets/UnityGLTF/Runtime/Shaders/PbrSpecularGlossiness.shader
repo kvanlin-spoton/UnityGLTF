@@ -128,7 +128,7 @@ Shader "GLTF/PbrSpecularGlossiness"
 			#pragma vertex vertAdd
 			#pragma fragment fragAdd
 			#include "UnityStandardInput.cginc"
-			#include "UnityStandardCoreForward.cginc"
+			#include "UnityGltfStandardCoreForward.cginc"
 
 			ENDCG
 		}
@@ -292,7 +292,7 @@ Shader "GLTF/PbrSpecularGlossiness"
 			#pragma vertex vertAdd
 			#pragma fragment fragAdd
 			#include "UnityStandardInput.cginc"
-			#include "UnityStandardCoreForward.cginc"
+			#include "UnityGltfStandardCoreForward.cginc"
 
 			ENDCG
 		}
